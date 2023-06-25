@@ -1,0 +1,33 @@
+﻿@using MegaHotel.Models.RoomModels
+@using System.Globalization
+@model Room
+
+<head>
+    <link rel="stylesheet" href="https://bootstrapmade.com/assets/css/demo.css?v=5.3">
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+    <div class="col-sm-4 col-lg-4 col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <img src="@Model.ImageURL" class="img-thumbnail" />
+            </div>
+            <div class="card-body">
+                <h3>
+                    <a class="text-link" asp-controller="Room" asp-action="Details" asp-route-id="@Model.IDRoom">@Model.Description</a>
+                </h3>
+                <h3 class="place-center">@Model.Price.ToString("C", CultureInfo.CreateSpecificCulture("en-US"))</h3>
+            </div>
+            <div class="place-center">
+                <div class="card-footer">
+                    <p class="button">
+                        <a class="btn-learn-more" asp-controller="Room"
+                           asp-action="Details" asp-route-id="@Model.IDRoom">
+                            See details
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

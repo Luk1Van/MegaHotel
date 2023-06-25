@@ -1,0 +1,25 @@
+﻿@model HotelMainApp.ViewModels.RoomListViewModel
+
+
+<head>
+    <link rel="stylesheet" href="https://bootstrapmade.com/assets/css/demo.css?v=5.3">
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+    <div>
+        <div class="container">
+            <div class="row">
+                <div class="icon-box mt-5 mt-lg-0">
+                    <h4>@Model.Rooms.FirstOrDefault().Description</h4>
+                </div>
+                <div class="icon-box mt-5 mt-lg-0">
+                    <h4>@Model.Types.FirstOrDefault().RoomType</h4>
+                </div>
+                <div class="icon-box mt-5 mt-lg-0">
+                    <h4>Price of this room is @Model.Rooms.FirstOrDefault().Price</h4>
+                </div>
+                <img class="image col-lg-6 order-1 order-lg-2" src="@Model.Rooms.FirstOrDefault().ImageURL"></img>
+            </div>
+        </div>
+    </div>
+</body>

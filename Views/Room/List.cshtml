@@ -1,0 +1,32 @@
+﻿@model HotelMainApp.ViewModels.RoomListViewModel
+
+<row>
+    <div class="dropdown">
+        <button class="dropbtn">Number of guests</button>
+        <div class="dropdown-content">
+            @foreach (var personNumber in Model.Capacities)
+            {
+                <a asp-controller="Room" asp-action="List" asp-route-guestNumber="@personNumber.GuestNumber" class="form-control">@personNumber.GuestNumber</a>
+            }
+            <a asp-controller="Room" asp-action="List" class="form-control">All rooms</a>
+        </div>
+    </div>
+
+    <div class="dropdown">
+        <button class="dropbtn">Room type</button>
+        <div class="dropdown-content">
+            @foreach (var roomType in Model.Types)
+            {
+                <a asp-controller="Room" asp-action="List" asp-route-roomType="@roomType.RoomType" class="form-control">@roomType.RoomType</a>
+            }
+            <a asp-controller="Room" asp-action="List" class="form-control">All rooms</a>
+        </div>
+    </div>
+</row>
+
+<div class="row">
+    @foreach (var room in Model.Rooms)
+    {
+        <partial name="_RoomCard" model="room" />
+    }
+</div>
