@@ -9,6 +9,7 @@ namespace MegaHotel.DependencyInjection
         {
             services.AddScoped<IRoomService, RoomService>();
             services.AddScoped<IMessageService, MessageService>();
+            services.AddScoped<IUserService, UserService>();
         }
     }
 }

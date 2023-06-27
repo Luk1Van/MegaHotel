@@ -1,5 +1,6 @@
 using MegaHotel.DataBase;
 using MegaHotel.DependencyInjection;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 
 namespace MegaHotel
@@ -12,6 +13,13 @@ namespace MegaHotel
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            //configuration for connection
+            builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options => //CookieAuthenticationOptions
+                {
+                    options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
+                });
 
             builder.Services.AddMyServiceDependencies();//Adding dependency injection from separated project
 
@@ -35,6 +43,7 @@ namespace MegaHotel
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapControllerRoute(

@@ -3,6 +3,7 @@ using MegaHotel.Models;
 using MegaHotel.Services.IHotelServices;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HotelMainApp.Controllers
 {
@@ -17,6 +18,7 @@ namespace HotelMainApp.Controllers
             _messageService = messageService;
         }
 
+        
         public IActionResult Index()
         {
             return View();
