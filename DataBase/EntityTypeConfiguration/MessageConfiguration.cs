@@ -9,7 +9,7 @@ namespace MegaHotel.DataBase.EntityTypeConfiguration
         public void Configure(EntityTypeBuilder<Message> builder)
         {
             builder.HasKey(x => x.Id);
-            builder.HasIndex(x => x.Id); ;
+            builder.HasIndex(x => x.Id);
         }
     }
 }

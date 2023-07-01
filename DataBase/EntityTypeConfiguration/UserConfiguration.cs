@@ -11,9 +11,14 @@ namespace MegaHotel.DataBase.EntityTypeConfiguration
            builder.HasKey(c => c.UserId);
            builder.HasIndex(c => c.UserId).IsUnique();
 
-            builder.HasData(new User { UserId = 1, Email = "capybara@gmail.com", Password = "happyCapy" });
-            builder.HasData(new User { UserId = 2, Email = "monkey@gmail.com", Password = "happyMonkey" });
-            builder.HasData(new User { UserId = 3, Email = "rat@gmail.com", Password = "happyRat" });
+           builder
+                 .HasOne(c => c._userRole)
+                 .WithMany(c => c._users)
+                 .HasForeignKey(c => c.UserRoleId);
+
+            builder.HasData(new User { UserId = 1, Email = "capybara@gmail.com", Password = "happyCapy", UserRoleId = 2 });
+            builder.HasData(new User { UserId = 2, Email = "monkey@gmail.com", Password = "happyMonkey", UserRoleId = 1 });
+            builder.HasData(new User { UserId = 3, Email = "rat@gmail.com", Password = "happyRat", UserRoleId = 1 });
         }
     }
 }

@@ -66,7 +66,7 @@ namespace MegaHotel.Controllers
             }
             return View(registerModel);
         }
-
+        
         private async Task Authenticate(string userName)
         {
             // Creates Claim object

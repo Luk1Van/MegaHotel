@@ -24,15 +24,25 @@ namespace HotelMainApp.Controllers
                 Types = _roomService.GetTypeRooms
             };
             
-            if (guestNumber.HasValue)
+            if (guestNumber.HasValue && roomType.HasValue)
+            {
+                model.Rooms = _roomService.GetRoomByTypeAndCapacity(guestNumber, roomType);               
+                return View(model);
+            }
+            else if (guestNumber.HasValue)
             {
                 model.Rooms = _roomService.GetRoomByCapacity(guestNumber);
+                return View(model);
             }
-            if (roomType.HasValue)
+            else if (roomType.HasValue)
             {
                 model.Rooms = _roomService.GetRoomByType(roomType);
+                return View(model);
             }
-            return View(model);
+            else
+            {
+                return View(model);
+            }
         }
 
         public IActionResult Details(int id)

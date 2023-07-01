@@ -1,28 +1,25 @@
 ﻿@model HotelMainApp.ViewModels.RoomListViewModel
 
-<row>
-    <div class="dropdown">
-        <button class="dropbtn">Number of guests</button>
-        <div class="dropdown-content">
-            @foreach (var personNumber in Model.Capacities)
+<form method="" action="/Room/List">
+    <row>
+        <select class="form-select" id="guestNumber" name="guestNumber">
+            <option value="">Any number of person</option>
+            @foreach(var personNumber in Model.Capacities)
             {
-                <a asp-controller="Room" asp-action="List" asp-route-guestNumber="@personNumber.GuestNumber" class="form-control">@personNumber.GuestNumber</a>
+                <option value="@personNumber.GuestNumber">@personNumber.GuestNumber</option>
             }
-            <a asp-controller="Room" asp-action="List" class="form-control">All rooms</a>
-        </div>
-    </div>
+        </select>
 
-    <div class="dropdown">
-        <button class="dropbtn">Room type</button>
-        <div class="dropdown-content">
+        <select class="form-select" id="roomType" name="roomType">
+            <option value="">Any room type</option>
             @foreach (var roomType in Model.Types)
             {
-                <a asp-controller="Room" asp-action="List" asp-route-roomType="@roomType.RoomType" class="form-control">@roomType.RoomType</a>
+                <option value="@roomType.RoomType">@roomType.RoomType</option>
             }
-            <a asp-controller="Room" asp-action="List" class="form-control">All rooms</a>
-        </div>
-    </div>
-</row>
+        </select>
+        <p><input class="dropbtn" type="submit" value="Send" /></p>
+    </row>
+</form>
 
 <div class="row">
     @foreach (var room in Model.Rooms)

@@ -40,5 +40,29 @@ namespace MegaHotel.Services.HotelServices
                        select c;
             return room;
         }
+
+        public IEnumerable<Room> GetRoomByTypeAndCapacity(int? guestNumber, EnumsRoom? roomType)
+        {
+            var room = from c in _hotelDb.Rooms
+                       where c._CapacityRoom.GuestNumber == guestNumber && c._TypeRoom.RoomType == roomType
+                       select c;
+            return room;
+        }
+
+        public async Task<string> AddNewRoom(Room newRoom)
+        {
+            if (newRoom != null)
+            {
+                await _hotelDb.Rooms.AddAsync(newRoom);
+                await _hotelDb.SaveChangesAsync();
+                string success = "RoomSuccess";
+                return success;
+            }
+            else
+            {
+                string error = "NewRoom";
+                return error;
+            }
+        }
     }
 }

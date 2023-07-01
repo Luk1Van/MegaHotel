@@ -15,6 +15,7 @@ namespace MegaHotel.DataBase.EntityTypeConfiguration
                 .HasOne(c => c._CapacityRoom)
                 .WithMany(a => a._RoomCapacity)
                 .HasForeignKey(k => k.CapacityRoomId);
+            
 
 
 

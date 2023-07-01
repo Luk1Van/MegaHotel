@@ -3,6 +3,7 @@ using MegaHotel.DataBase;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MegaHotel.Migrations
 {
     [DbContext(typeof(HotelDbContext))]
-    partial class HotelDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230627191548_addedCalendar")]
+    partial class addedCalendar
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -312,15 +315,10 @@ namespace MegaHotel.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UserRoleId")
-                        .HasColumnType("int");
-
                     b.HasKey("UserId");
 
                     b.HasIndex("UserId")
                         .IsUnique();
-
-                    b.HasIndex("UserRoleId");
 
                     b.ToTable("Users");
 
@@ -329,53 +327,19 @@ namespace MegaHotel.Migrations
                         {
                             UserId = 1,
                             Email = "capybara@gmail.com",
-                            Password = "happyCapy",
-                            UserRoleId = 2
+                            Password = "happyCapy"
                         },
                         new
                         {
                             UserId = 2,
                             Email = "monkey@gmail.com",
-                            Password = "happyMonkey",
-                            UserRoleId = 1
+                            Password = "happyMonkey"
                         },
                         new
                         {
                             UserId = 3,
                             Email = "rat@gmail.com",
-                            Password = "happyRat",
-                            UserRoleId = 1
-                        });
-                });
-
-            modelBuilder.Entity("MegaHotel.Models.UserModels.UserRole", b =>
-                {
-                    b.Property<int>("IdRole")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdRole"));
-
-                    b.Property<int>("Role")
-                        .HasColumnType("int");
-
-                    b.HasKey("IdRole");
-
-                    b.HasIndex("IdRole")
-                        .IsUnique();
-
-                    b.ToTable("UserRoles");
-
-                    b.HasData(
-                        new
-                        {
-                            IdRole = 1,
-                            Role = 0
-                        },
-                        new
-                        {
-                            IdRole = 2,
-                            Role = 1
+                            Password = "happyRat"
                         });
                 });
 
@@ -409,17 +373,6 @@ namespace MegaHotel.Migrations
                     b.Navigation("_TypeRoom");
                 });
 
-            modelBuilder.Entity("MegaHotel.Models.UserModels.User", b =>
-                {
-                    b.HasOne("MegaHotel.Models.UserModels.UserRole", "_userRole")
-                        .WithMany("_users")
-                        .HasForeignKey("UserRoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("_userRole");
-                });
-
             modelBuilder.Entity("MegaHotel.Models.RoomModels.CapacityRoom", b =>
                 {
                     b.Navigation("_RoomCapacity");
@@ -433,11 +386,6 @@ namespace MegaHotel.Migrations
             modelBuilder.Entity("MegaHotel.Models.RoomModels.TypeRoom", b =>
                 {
                     b.Navigation("_RoomType");
-                });
-
-            modelBuilder.Entity("MegaHotel.Models.UserModels.UserRole", b =>
-                {
-                    b.Navigation("_users");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,0 +1,31 @@
+﻿@using MegaHotel.Models.RoomModels
+@model Room
+
+<h3>Add new room</h3>
+<form asp-action="NewRoom" asp-controller="Admin" asp-antiforgery="true">
+    <div class="mb-3">
+        <label asp-for="@Model.RoomNumber" class="form-label">Room Number</label>
+        <input asp-for="@Model.RoomNumber" type="number" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label asp-for="@Model.Price" class="form-label">Price</label>
+        <input asp-for="@Model.Price" type="number" step="0.01" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label asp-for="@Model.Description" class="form-label">Description</label>
+        <input asp-for="@Model.Description" type="text" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label asp-for="@Model.ImageURL" class="form-label">Image url</label>
+        <input asp-for="@Model.ImageURL" type="text" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label asp-for="@Model.CapacityRoomId" class="form-label">Capacity room id</label>
+        <input asp-for="@Model.CapacityRoomId" type="number" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label asp-for="@Model.TypeRoomId" class="form-label">Room type id</label>
+        <input asp-for="@Model.TypeRoomId" type="number" class="form-control" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
