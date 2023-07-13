@@ -1,5 +1,6 @@
 ﻿using MegaHotel.DataBase.EntityTypeConfiguration;
 using MegaHotel.Models.MessageModels;
+using MegaHotel.Models.OrderModels;
 using MegaHotel.Models.RoomModels;
 using MegaHotel.Models.UserModels;
 using Microsoft.EntityFrameworkCore;
@@ -13,7 +14,7 @@ namespace MegaHotel.DataBase
     {
         public HotelDbContext(DbContextOptions<HotelDbContext> options) : base(options)
         {
-            Database.EnsureDeleted();
+            //Database.EnsureDeleted();
             Database.EnsureCreated();
         }
 
@@ -24,6 +25,7 @@ namespace MegaHotel.DataBase
         public DbSet<User> Users { get; set; }
         public DbSet<CalendarRoom> CalendarRooms { get; set; }
         public DbSet<UserRole> UserRoles { get; set; }
+        public DbSet<Order> Orders { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -35,6 +37,7 @@ namespace MegaHotel.DataBase
             modelBuilder.ApplyConfiguration(new UserConfiguration());
             modelBuilder.ApplyConfiguration(new CalendarConfiguration());
             modelBuilder.ApplyConfiguration(new UserRoleConfiguration());
+            modelBuilder.ApplyConfiguration(new OrderConfiguration());
             base.OnModelCreating(modelBuilder);
 
         }

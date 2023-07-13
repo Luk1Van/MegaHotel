@@ -18,9 +18,10 @@ namespace MegaHotel.DataBase.EntityTypeConfiguration
                 .WithMany(a => a._CalendarRoom)
                 .HasForeignKey(k => k.RoomCalendarId);
 
-            builder.HasData( new CalendarRoom { IDCalendar = 1, Data = 1, RoomCalendarId = 1, IsAvaible =true } );
-            builder.HasData(new CalendarRoom { IDCalendar = 2, Data = 2, RoomCalendarId = 1, IsAvaible = true });
-            builder.HasData(new CalendarRoom { IDCalendar = 3, Data = 3, RoomCalendarId = 1, IsAvaible = true });
+            builder
+                .HasOne(c => c._CalendarOrder)
+                .WithMany(c => c._calendarOrders)
+                .HasForeignKey(c => c.CalendarOrderId);
         }
     }
 }

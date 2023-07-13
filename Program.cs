@@ -21,7 +21,7 @@ namespace MegaHotel
                     options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
                 });
 
-            builder.Services.AddMyServiceDependencies();//Adding dependency injection from separated project
+            builder.Services.AddMyServiceDependencies();//Adding dependency injection from separated folder
 
             builder.Services.AddDbContextPool<HotelDbContext>(options =>
             {

@@ -32,8 +32,12 @@ namespace MegaHotel.Controllers
                 User user = _userService.CheckUser(loginModel.Email, loginModel.Password).FirstOrDefault();
                 if (user != null)
                 {
-                    await Authenticate(loginModel.Email);
-                    return RedirectToAction("Index", "Home");
+                    await Authenticate(user);
+                    if(user._userRole.Role == "admin")
+                    {
+                        return RedirectToAction("NewRoom", "Admin");
+                    }
+                    return RedirectToAction("List", "Room");
                 }
                 ModelState.AddModelError("", "Incorrect email or password");
             }
@@ -55,24 +59,25 @@ namespace MegaHotel.Controllers
                 User user = _userService.CheckUserEmail(registerModel.Email).FirstOrDefault();
                 if (user == null)
                 {
-                    await _userService.AddUser(registerModel.Email, registerModel.Password);
+                    var newUser = await _userService.AddUser(registerModel.Email, registerModel.Password);
+                    User userRole = _userService.CheckUser(newUser.Email, newUser.Password).FirstOrDefault();
+                    await Authenticate(userRole);
 
-                    await Authenticate(registerModel.Email);
-
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("List", "Room");
                 }
                 else
-                    ModelState.AddModelError("", "Login or password is incorrect");
+                    ModelState.AddModelError("", "This email is already used");
             }
             return View(registerModel);
         }
         
-        private async Task Authenticate(string userName)
+        private async Task Authenticate(User user)
         {
             // Creates Claim object
             var claims = new List<Claim>
             {
-                new Claim(ClaimsIdentity.DefaultNameClaimType, userName)
+                new Claim(ClaimsIdentity.DefaultNameClaimType, user.Email),
+                new Claim(ClaimsIdentity.DefaultRoleClaimType, user._userRole?.Role)
             };
             // Creates object ClaimsIdentity
             ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);

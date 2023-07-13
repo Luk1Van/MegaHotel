@@ -12,5 +12,7 @@ namespace MegaHotel.Services.IHotelServices
         public IEnumerable<TypeRoom> GetTypeRooms { get; }
         public IEnumerable<Room> GetRoomByType(EnumsRoom? roomType);
         public Task<string> AddNewRoom(Room newRoom);
+        public bool CheckRoomByDate(DateTime? checkInDate, DateTime? departureDate, int? roomId);
+        public Task AddNewBooking(DateTime checkInDate, DateTime departureDate, int roomId, string userName);
     }
 }

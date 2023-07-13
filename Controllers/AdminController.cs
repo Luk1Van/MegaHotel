@@ -2,10 +2,11 @@
 using MegaHotel.Services.IHotelServices;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Identity.Client;
 
 namespace MegaHotel.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "admin")]
     public class AdminController : Controller
     {
         private readonly IRoomService _roomService;
@@ -32,5 +33,7 @@ namespace MegaHotel.Controllers
                 return this.StatusCode(StatusCodes.Status404NotFound, ex);
             }
         }
+
+        
     }
 }

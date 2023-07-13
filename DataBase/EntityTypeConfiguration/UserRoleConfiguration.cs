@@ -11,8 +11,11 @@ namespace MegaHotel.DataBase.EntityTypeConfiguration
             builder.HasKey(c => c.IdRole);
             builder.HasIndex(c => c.IdRole).IsUnique();
 
-            builder.HasData(new UserRole { IdRole = 1, Role = EnumRole.RegularUser});
-            builder.HasData(new UserRole { IdRole = 2, Role = EnumRole.Admin });
+            /*builder.HasData(new UserRole { IdRole = 1, Role = EnumRole.RegularUser});
+            builder.HasData(new UserRole { IdRole = 2, Role = EnumRole.Admin });*/
+
+            builder.HasData(new UserRole { IdRole = 1, Role = "regularUser" });
+            builder.HasData(new UserRole { IdRole = 2, Role = "admin" });
         }
     }
 }

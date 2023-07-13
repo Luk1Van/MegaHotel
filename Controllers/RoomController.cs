@@ -1,5 +1,6 @@
 ﻿using HotelMainApp.ViewModels;
 using MegaHotel.Models.RoomModels;
+using MegaHotel.Services.HotelServices;
 using MegaHotel.Services.IHotelServices;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Mvc;
@@ -23,10 +24,12 @@ namespace HotelMainApp.Controllers
                 Capacities = _roomService.GetCapacity,
                 Types = _roomService.GetTypeRooms
             };
+
             
+
             if (guestNumber.HasValue && roomType.HasValue)
             {
-                model.Rooms = _roomService.GetRoomByTypeAndCapacity(guestNumber, roomType);               
+                model.Rooms = _roomService.GetRoomByTypeAndCapacity(guestNumber, roomType);                
                 return View(model);
             }
             else if (guestNumber.HasValue)

@@ -2,16 +2,18 @@
 {
     public class UserRole
     {
+        
+        public int IdRole { get; set; }
+        //public EnumRole Role { get; set; }
+        public string Role { get; set; }
+        public ICollection<User> _users { get; set; }
         public UserRole()
         {
             _users = new HashSet<User>();
         }
-        public int IdRole { get; set; }
-        public EnumRole Role { get; set; }
-        public ICollection<User> _users { get; set; }
     }
-    public enum EnumRole
+    /*public enum EnumRole
     { 
         RegularUser, Admin
-    }
+    }*/
 }

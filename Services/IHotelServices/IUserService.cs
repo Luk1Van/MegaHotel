@@ -6,6 +6,6 @@ namespace MegaHotel.Services.IHotelServices
     {
         public IEnumerable<User> CheckUser(string email, string password);
         public IEnumerable<User> CheckUserEmail(string email);
-        public Task<string> AddUser(string email, string password);
+        public Task<User> AddUser(string email, string password);
     }
 }

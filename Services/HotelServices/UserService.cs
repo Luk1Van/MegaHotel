@@ -2,6 +2,7 @@
 using MegaHotel.Models.UserModels;
 using MegaHotel.Services.IHotelServices;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 
 namespace MegaHotel.Services.HotelServices
@@ -15,19 +16,19 @@ namespace MegaHotel.Services.HotelServices
             _hotelDbContext = hotelDbContext;
         }
 
-        public async Task<string> AddUser(string email, string password)
+        public async Task<User> AddUser(string email, string password)
         {
-            User newUser = new User { Email = email, Password = password };
+            User newUser = new User { Email = email, Password = password, UserRoleId = 1 };
             await _hotelDbContext.AddAsync(newUser);
             await _hotelDbContext.SaveChangesAsync();
-            return "New user added successfully";
+            return newUser;
         }
 
         public IEnumerable<User> CheckUser(string email, string password)
         {
-            var user = from c in _hotelDbContext.Users
-                       where c.Email == email   && c.Password == password
-                       select c;
+            var user = (from c in _hotelDbContext.Users
+                       where c.Email == email  && c.Password == password
+                       select c).Include(c => c._userRole);
             return user;
         }
 
