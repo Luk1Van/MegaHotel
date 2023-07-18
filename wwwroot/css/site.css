@@ -132,3 +132,8 @@ ul {
     border-top: 4px solid #fff;
     border-radius: 5px;
 }
+
+.error-message{
+    color: darkred;
+    font-size: 18px;
+}

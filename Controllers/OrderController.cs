@@ -36,6 +36,18 @@ namespace MegaHotel.Controllers
         [HttpPost]
         public async Task<ActionResult> NewOrder(int roomID, DateTime checkInDate, DateTime departureDate)
         {
+            OrderViewModel model = new OrderViewModel()
+            {
+                Rooms = _roomService.GetRoomById(roomID).FirstOrDefault(),
+                CapacityRoom = _roomService.GetCapacity.FirstOrDefault(),
+                TypeRoom = _roomService.GetTypeRooms.FirstOrDefault()
+            };
+            if(departureDate < checkInDate)
+            {
+                ModelState.AddModelError("ArrivaleDate", "Departure cant be earlier the arival!");
+                return View(model);
+            }
+
             bool checkRoom = _roomService.CheckRoomByDate(checkInDate, departureDate, roomID);
             if(checkRoom == true)
             {
@@ -45,7 +57,8 @@ namespace MegaHotel.Controllers
             }
             else
             {
-                return View();
+                ModelState.AddModelError("DateOfDeparture", "This room is already booked for this dates");
+                return View(model);
             }
         }
         

@@ -14,11 +14,17 @@
             <input type="date" id="checkInDate" name="checkInDate"
                    value="2023-07-01"
                    min="2023-07-01" max="2023-08-30">
+            
 
             <label for="start">Departure date:</label>
             <input type="date" id="departureDate" name="departureDate"
                    value="2023-07-01"
                    min="2023-07-02" max="2023-08-31">
+            
+        <div class="error-message">
+                    @Html.ValidationMessageFor(model => model.ArrivaleDate)
+                    @Html.ValidationMessageFor(model => model.DateOfDeparture)
+        </div>
 
             <input type="hidden" id="roomID" name="roomID" value="@Model.Rooms.IDRoom" />
 
